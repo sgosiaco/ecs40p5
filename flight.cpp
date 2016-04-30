@@ -32,7 +32,7 @@ void Flight::addFlight()
   cin.getline(origin, MAX_CITY_LENGTH);
   cout << "Destination: ";
   cin.getline(destination, MAX_CITY_LENGTH);
-  plane = new Plane();
+  plane = new Plane(flightNum);
   plane->addFlight();
 }  // addFlight()
 
