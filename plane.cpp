@@ -58,7 +58,7 @@ Plane::~Plane()
   int row;
 
   for(row = 0; row < rows; row++)
-    delete passengers[row];
+    delete [] passengers[row];
 
   delete [] passengers;
 }  // ~Plane()
