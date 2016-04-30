@@ -37,7 +37,7 @@ Flights& Flights::operator++()
   flight->addFlight();
   (*this) += flight;
   return *this;
-} //addFlight()
+} //++
 
 void Flights::addPassenger() const
 {
@@ -98,12 +98,7 @@ Flights& Flights::operator+=(Flight *flight)
   flights[i + 1] = flight;
   (size)++;
   return *this;
-} //insert()
-
-int Flights::getSize() const
-{
-  return size;
-}  // size()
+} //+=
 
 istream& operator>>(istream &is, Flights &rhs)
 {
@@ -119,7 +114,7 @@ istream& operator>>(istream &is, Flights &rhs)
   }  // for each flight
 
   return is;
-} //readFlights()
+} //>>
 
 Flights& Flights::operator--()
 {
@@ -148,7 +143,7 @@ Flights& Flights::operator--()
     }  // if found match of flight
 
   return *this;
-} //removeFlight()
+} //--
 
 void Flights::removePassenger() const
 {
@@ -187,4 +182,4 @@ void Flights::find() const
 
   if(!found)
       cout << name << " not found.\n";
-}
+} //find

@@ -12,7 +12,7 @@ const Flight& Flight::operator++(int)
 {
   ++(*plane);
   return *this;
-} //addPassenger()
+} //++
 
 Flight::~Flight()
 {
@@ -47,7 +47,7 @@ ostream& operator<<(ostream &os, const Flight &flight)
   os << setw(flight.MAX_CITY_LENGTH) << flight.origin;
   os << ' '  << flight.destination << endl;
   return os;
-} // printFlightInfo()
+} // <<
 
 istream& operator>>(istream &is, Flight &flight)
 {
@@ -58,21 +58,21 @@ istream& operator>>(istream &is, Flight &flight)
   flight.plane = new Plane(flight.flightNum);
   is >> *flight.plane;
   return is;
-} // readFlight()
+} // >>
 
 Flight& Flight::operator!()
 {
   !(*(*this).plane);
   return *this;
-} //removeFlight()
+} //!
 
 Flight& Flight::operator--()
 {
   (*(*this).plane)--;
   return *this;
-} //removePassenger()
+} //--
 
 bool Flight::find(char *name)
 {
   return plane->find(name);
-}
+} //find

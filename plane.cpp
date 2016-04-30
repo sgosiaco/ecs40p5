@@ -51,7 +51,7 @@ istream& operator>>(istream &is, Plane &rhs)
 
   inf2.close();
   return is;
-} //readPlane()
+} //>>
 
 Plane::~Plane()
 {
@@ -118,7 +118,7 @@ Plane& Plane::operator++()
   outf.write((char*) &passenger, sizeof(Passenger));
   reserved++;
   return *this;
-} //addPassenger()
+} //++
 
 int Plane::getRow() const
 {
@@ -199,7 +199,7 @@ Plane& Plane::operator--(int)
 
   inOutf.close();
   return *this;
-} //removePassenger()
+} //--
 
 Plane& Plane::operator!()
 {
@@ -218,7 +218,7 @@ Plane& Plane::operator!()
       }  // if seat not empty
 
   return *this;
-} //removePlane()
+} //!
 
 ostream& operator<<(ostream &os, const Plane &rhs)
 {
@@ -236,7 +236,7 @@ ostream& operator<<(ostream &os, const Plane &rhs)
 
    inf.close();
   return os;
-} //showPassengers
+} //<<
 
 void Plane::writePlane(ofstream &outf) const
 {
@@ -280,4 +280,4 @@ bool Plane::find(char *name) const
 
   inOutf.close();
   return found;
-}
+} //find

@@ -17,7 +17,6 @@ public:
   void addPassenger() const;
   Flights& operator++();
   Flights& operator+=(Flight *flight);
-  int getSize() const;
   friend istream& operator>>(istream &is, Flights &rhs);
   Flights& operator--();
   void removePassenger() const;

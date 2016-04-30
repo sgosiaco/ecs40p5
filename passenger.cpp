@@ -36,7 +36,7 @@ bool Passenger::operator==(int num)
   return flightNum == num;
 } //num equal
 
-bool Passenger::operator==(char* n)
+bool Passenger::operator==(const char* n)
 {
   return (strcmp(name, n) == 0);
 } //name equal
