@@ -64,7 +64,7 @@ int main(int argc, char** argv)
       case ADD_PASSENGER : flights.addPassenger(); break;
       case REMOVE_PASSENGER : flights.removePassenger(); break;
       case ADD_FLIGHT : ++flights; break;
-      case REMOVE_FLIGHT : --flights; break;
+      case REMOVE_FLIGHT : flights--; break;
       case FIND : flights.find(); break;
     }  // switch
 

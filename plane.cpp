@@ -217,6 +217,7 @@ Plane& Plane::operator!()
         inOutf.write((char*) &passenger, sizeof(Passenger));
       }  // if seat not empty
 
+  inOutf.close();
   return *this;
 } //!
 

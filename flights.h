@@ -18,7 +18,7 @@ public:
   Flights& operator++();
   Flights& operator+=(Flight *flight);
   friend istream& operator>>(istream &is, Flights &rhs);
-  Flights& operator--();
+  Flights& operator--(int);
   void removePassenger() const;
   void find() const;
 }; // class flights

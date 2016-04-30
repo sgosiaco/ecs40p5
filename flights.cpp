@@ -35,7 +35,7 @@ Flights& Flights::operator++()
 
   Flight *flight = new Flight();
   flight->addFlight();
-  (*this) += flight;
+  *this += flight;
   return *this;
 } //++
 
@@ -116,7 +116,7 @@ istream& operator>>(istream &is, Flights &rhs)
   return is;
 } //>>
 
-Flights& Flights::operator--()
+Flights& Flights::operator--(int)
 {
   int i, flightNumber;
   cout << "Existing Flights:\n\n";
