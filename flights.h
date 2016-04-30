@@ -3,7 +3,7 @@
 
 #include "flight.h"
 
-class Flights 
+class Flights
 {
   static const int INITIAL_SIZE = 2;
   static const int RESIZE_MULTIPLIER = 2;
@@ -15,13 +15,12 @@ public:
   Flights();
   ~Flights();
   void addPassenger() const;
-  void addFlight();
-  void insert(Flight *flight);
+  friend Flights& operator++(Flights &rhs);
+  friend Flights& operator+=(Flights &rhs, Flight *flight);
   int getSize() const;
-  void readFlights();
-  void removeFlight();
+  friend istream& operator>>(istream &is, Flights &rhs);
+  friend Flights& operator--(Flights &rhs);
   void removePassenger() const;
-}; // class flights 
+}; // class flights
 
 #endif	// FLIGHTS_H
-

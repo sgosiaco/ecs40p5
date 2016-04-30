@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 class Plane
 {
   static const int EMPTY = -1;
@@ -16,20 +15,21 @@ class Plane
   int width;
   int reserved;
   int **passengers;
+  int flightNumber;
   int getRow() const;
   void showGrid() const;
   void showPassengers() const;
+  friend ostream& operator<<(ostream &os, const Plane &rhs);
 public:
   Plane();
-  Plane(ifstream &inf, int flightNumber);
+  Plane(int flightNum);
   ~Plane();
   void addFlight();
-  int addPassenger(int flightNumber);
-  void removePassenger(int flightNumber);
+  int addPassenger();
+  void removePassenger();
   void removePlane() const;
-  void writePlane(ofstream &outf, int flightNumber) const;
+  void writePlane(ofstream &outf) const;
+  friend istream& operator>>(istream &is, Plane &plane);
 }; // class Plane
 
 #endif	// PLANE_H
-
-

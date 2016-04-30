@@ -5,12 +5,12 @@
 using namespace std;
 
 
-Passenger::Passenger() 
+Passenger::Passenger()
 {
 } // Passenger()
 
 
-Passenger::Passenger(short flightNu, short ro, char sea, const char nam[]) : 
+Passenger::Passenger(short flightNu, short ro, char sea, const char nam[]) :
   flightNum(flightNu), row(ro), seat(sea)
 {
   strcpy(name, nam);
@@ -30,3 +30,25 @@ void Passenger::copyPassengers()
   outf.close();
   inf.close();
 }  // copyPassengers()
+
+bool operator==(Passenger &pass, int num)
+{
+  return pass.flightNum == num;
+} //num equal
+
+bool operator==(Passenger &pass, char* name)
+{
+  return (strcmp(pass.name, name) == 0);
+} //name equal
+
+Passenger& operator!(Passenger &pass)
+{
+  pass.flightNum = pass.CANCELLED;
+  return pass;
+} //cancel
+
+ostream& operator<<(ostream &os, Passenger pass)
+{
+  os << pass.name;
+  return os;
+} //print info

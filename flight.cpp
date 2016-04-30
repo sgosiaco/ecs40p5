@@ -8,18 +8,18 @@
 
 using namespace std;
 
-void Flight::addPassenger() const
+Flight& Flight::operator++(int)
 {
-  if(!plane->addPassenger(flightNum))
+  if(!plane->addPassenger())
     cout << "We are sorry but Flight #" << flightNum << " is full.\n";
-}  // addPassenger()
-
+  return *this;
+} //addPassenger()
 
 Flight::~Flight()
 {
   ofstream outf("flights2.csv", ios::app);
   outf << flightNum << ',' << origin << ',' << destination << ',';
-  plane->writePlane(outf, flightNum);
+  plane->writePlane(outf);
   outf.close();
   delete plane;
 }  // freeFlight()
@@ -42,32 +42,33 @@ int Flight::getFlightNumber() const
   return flightNum;
 }  // getFlightNumber()
 
-
-void Flight::printFlightInfo() const
+ostream& operator<<(ostream &os, const Flight &flight)
 {
-  cout << left << setw(FLIGHT_NUM_SPACE) << flightNum << ' ' 
-    << setw(MAX_CITY_LENGTH) << origin << ' '  << destination << endl;
-}  // printFlightInfo()
+  os << left << setw(flight.FLIGHT_NUM_SPACE) << flight.flightNum << ' ';
+  os << setw(flight.MAX_CITY_LENGTH) << flight.origin;
+  os << ' '  << flight.destination << endl;
+  return os;
+} // printFlightInfo()
 
-
-void Flight::readFlight( ifstream &inf)
-{ 
-  inf >> flightNum;
-  inf.ignore(TEN, ',');
-  inf.getline(origin, MAX_CITY_LENGTH, ',');
-  inf.getline(destination, MAX_CITY_LENGTH, ',');
-  plane = new Plane(inf, flightNum);
-}  // readFlight()
-
-
-void Flight::removeFlight()
+istream& operator>>(istream &is, Flight &flight)
 {
-  plane->removePlane();
-}  // removePassenger();
+  is >> flight.flightNum;
+  is.ignore(flight.TEN, ',');
+  is.getline(flight.origin, flight.MAX_CITY_LENGTH, ',');
+  is.getline(flight.destination, flight.MAX_CITY_LENGTH, ',');
+  flight.plane = new Plane(flight.flightNum);
+  is >> *flight.plane;
+  return is;
+} // readFlight()
 
-
-void Flight::removePassenger() const
+Flight& operator!(Flight &flight)
 {
-  plane->removePassenger(flightNum);
-}  // removePassenger();
+  flight.plane->removePlane();
+  return flight;
+} //removeFlight()
 
+Flight& operator--(Flight &flight)
+{
+  flight.plane->removePassenger();
+  return flight;
+} //removePassenger()

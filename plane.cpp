@@ -17,45 +17,50 @@ Plane::Plane()
 }  // Plane()
 
 
-Plane::Plane( ifstream &inf, int flightNumber) :reserved( 0 )
+Plane::Plane(int flightNum) :reserved( 0 ), flightNumber (flightNum)
+{
+
+}  // Plane()
+
+istream& operator>>(istream &is, Plane &rhs)
 {
   int row, seatNum;
   char comma;
-  Passenger passenger;
-  inf >> rows >> comma >> width;
-  passengers = new int* [rows];
-  
-  for(row = 0; row < rows; row++)
+  Passenger pass;
+  is >> rhs.rows >> comma >> rhs.width;
+  rhs.passengers = new int* [rhs.rows];
+
+  for(row = 0; row < rhs.rows; row++)
   {
-    passengers[row] = new int[width];
-    
-    for(seatNum = 0; seatNum < width; seatNum++)
-      passengers[row][seatNum] = EMPTY;
+    rhs.passengers[row] = new int[rhs.width];
+
+    for(seatNum = 0; seatNum < rhs.width; seatNum++)
+      rhs.passengers[row][seatNum] = rhs.EMPTY;
   } // for each row
-  
+
   ifstream inf2("passengers.dat", ios::binary);
-  
-  while(inf2.read((char*) &passenger, sizeof(Passenger)))
+
+  while(inf2.read((char*) &pass, sizeof(Passenger)))
   {
-    if(passenger.flightNum == flightNumber)
+    if(pass == rhs.flightNumber)
     {
-      passengers[passenger.row - FIRST_ROW][passenger.seat - FIRST_SEAT] 
+      rhs.passengers[pass.row - rhs.FIRST_ROW][pass.seat - rhs.FIRST_SEAT]
         = (int) inf2.tellg() - sizeof(Passenger);
-      reserved++;
+      rhs.reserved++;
     }  // if the passenger is on this flight
   }  // while more in file
-  
-  inf2.close();
-}  // Plane()
 
+  inf2.close();
+  return is;
+} //readPlane()
 
 Plane::~Plane()
 {
   int row;
-  
+
   for(row = 0; row < rows; row++)
     delete passengers[row];
-  
+
   delete [] passengers;
 }  // ~Plane()
 
@@ -66,31 +71,31 @@ void Plane::addFlight()
   cin >> rows;
   cout << "Width: ";
   cin >> width;
-  cin.ignore(TEN, '\n');  
+  cin.ignore(TEN, '\n');
   passengers = new int* [rows];
-  
+
   for(int row = 0; row < rows; row++)
   {
     passengers[row] = new int[width];
-    
+
     for(int seatNum = 0; seatNum < width; seatNum++)
       passengers[row][seatNum] = EMPTY;
   } // for each row
 }  // addFlight()
 
 
-int Plane::addPassenger(int flightNumber)
+int Plane::addPassenger()
 {
   int row, seatNum;
   char name[Passenger::NAME_LENGTH], seat;
-  
+
   if(reserved == rows * width)
     return 0;  // false
-  
+
   cout << "Please enter the name of the passenger: ";
   cin.getline(name, Passenger::NAME_LENGTH);
   showGrid();
-  
+
   while(true)
   {
     row = getRow();
@@ -105,7 +110,7 @@ int Plane::addPassenger(int flightNumber)
 
     printf("That seat is already occupied.\nPlease try again.\n");
   } // while occupied seat
-  
+
   ofstream outf("passengers2.dat", ios::binary | ios::app);
   passengers[row - FIRST_ROW][seatNum] = outf.tellp();
   Passenger passenger(flightNumber, row, seat, name);
@@ -118,7 +123,7 @@ int Plane::addPassenger(int flightNumber)
 int Plane::getRow() const
 {
   int row;
-  
+
   do
   {
     cout << "\nPlease enter the row of the seat you wish to reserve: ";
@@ -128,11 +133,11 @@ int Plane::getRow() const
       cout << "That is an invalid row number.\nPlease try again.\n";
     else  // valid row number
       if(row < 1 || row > rows)
-        cout << "There is no row #" << row 
-          << " on this flight.\nPlease try again.\n"; 
-          
+        cout << "There is no row #" << row
+          << " on this flight.\nPlease try again.\n";
+
   }  while(row < 1 || row > rows);
-  
+
   return row;
 } // getRow()
 
@@ -140,59 +145,59 @@ int Plane::getRow() const
 void Plane::showGrid() const
 {
   int row, seatNum = 0;
-  
+
   cout << "ROW# ";
-  
+
   for(seatNum = 0; seatNum < width; seatNum++)
     cout << char(seatNum + FIRST_SEAT);
-  
+
   cout << endl;
-  
+
   for(row = 0; row < rows; row++)
   {
     cout << right << setw(ROW_SPACE) << row + 1 << "   ";
-    
+
     for(seatNum = 0; seatNum < width; seatNum++)
       if(passengers[row][seatNum] != EMPTY)
         cout << 'X';
       else  // empty seat
         cout << '-';
-    
+
     cout << endl;
   }  // for each row
-  
+
   cout << "\nX = reserved.\n";
 }  // showGrid()
 
 
-void Plane::removePassenger(int flightNumber)
+void Plane::removePassenger()
 {
   char name[Passenger::NAME_LENGTH];
   Passenger passenger;
   cout << "Passengers on Flight #" << flightNumber << endl;
-  showPassengers();
+  cout << *this;
   fstream inOutf("passengers2.dat", ios::binary | ios::in | ios::out);
   cout << "\nName of passenger to remove: ";
   cin.getline(name, Passenger::NAME_LENGTH);
   bool found = false;
-  
+
   for(int row = 0; !found && row < rows; row++)
     for(int seatNum = 0; !found && seatNum < width; seatNum++)
       if(passengers[row][seatNum] != EMPTY)
       {
         inOutf.seekg(passengers[row][seatNum], ios::beg);
         inOutf.read((char*) &passenger, sizeof(Passenger));
-        
-        if(strcmp(passenger.name, name) == 0)
+
+        if(passenger == name)
         {
-          passenger.flightNum = EMPTY;
+          !passenger;
           inOutf.seekp(passengers[row][seatNum], ios::beg);
           inOutf.write((char*) &passenger, sizeof(Passenger));
           passengers[row][seatNum] = EMPTY;
           found = true;
         }  // if found name
       }  // if seat not empty
-  
+
   inOutf.close();
 }  // removePassenger()
 
@@ -208,38 +213,37 @@ void Plane::removePlane() const
       {
         inOutf.seekg(passengers[row][seatNum], ios::beg);
         inOutf.read((char*) &passenger, sizeof(Passenger));
-        passenger.flightNum = EMPTY;
+        !passenger;
         inOutf.seekp(passengers[row][seatNum], ios::beg);
         inOutf.write((char*) &passenger, sizeof(Passenger));
       }  // if seat not empty
-  
+
 }  // removePlane()
 
-
-void Plane::showPassengers() const
+ostream& operator<<(ostream &os, const Plane &rhs)
 {
   Passenger passenger;
   ifstream inf("passengers2.dat", ios::binary);
-  
-  for(int row = 0; row < rows; row++)
-    for(int seatNum = 0; seatNum < width; seatNum++)
-      if(passengers[row][seatNum] != EMPTY)
-      { 
-        inf.seekg(passengers[row][seatNum], ios::beg);
+
+  for(int row = 0; row < rhs.rows; row++)
+    for(int seatNum = 0; seatNum < rhs.width; seatNum++)
+      if(rhs.passengers[row][seatNum] != rhs.EMPTY)
+      {
+        inf.seekg(rhs.passengers[row][seatNum], ios::beg);
         inf.read((char*) &passenger, sizeof(Passenger));
-        cout << passenger.name << endl;
+        os << passenger << endl;
       }  // if not EMPTY
 
    inf.close();
-}  // showPassengers()
+  return os;
+} //showPassengers
 
-
-void Plane::writePlane(ofstream &outf, int flightNumber) const
+void Plane::writePlane(ofstream &outf) const
 {
   int row, seatNum;
   Passenger passenger;
   outf << rows << ',' << width << endl;
-  
+
   ifstream inf("passengers2.dat", ios::binary);
   ofstream outf2("passengers3.dat", ios::binary | ios::app);
 
@@ -252,4 +256,3 @@ void Plane::writePlane(ofstream &outf, int flightNumber) const
         outf2.write((char*) &passenger, sizeof(Passenger));
       }  // if seat not empty
 }  // readPlane()
-
