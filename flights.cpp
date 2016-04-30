@@ -177,7 +177,6 @@ void Flights::find() const
     if(flights[i]->find(name))
     {
       found = true;
-      break;
     }//if match
 
   if(!found)
