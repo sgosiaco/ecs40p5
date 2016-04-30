@@ -21,6 +21,7 @@ public:
   friend istream& operator>>(istream &is, Flights &rhs);
   Flights& operator--();
   void removePassenger() const;
+  void find() const;
 }; // class flights
 
 #endif	// FLIGHTS_H

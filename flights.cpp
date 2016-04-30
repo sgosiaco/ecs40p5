@@ -2,6 +2,7 @@
 
 #include "flights.h"
 #include "utilities.h"
+#include "passenger.h"
 
 Flights::Flights() : size( 0 ), capacity(INITIAL_SIZE)
 {
@@ -169,3 +170,21 @@ void Flights::removePassenger() const
       break;
     }  // if found match of flight
 }  // removePassenger()
+
+void Flights::find() const
+{
+  char name[Passenger::NAME_LENGTH];
+  cout << "\nName of passenger: ";
+  cin.getline(name, Passenger::NAME_LENGTH);\
+  bool found = false;
+
+  for(int i = 0; i < size; i++)
+    if(flights[i]->find(name))
+    {
+      found = true;
+      break;
+    }//if match
+
+  if(!found)
+      cout << name << " not found.\n";
+}

@@ -71,3 +71,8 @@ Flight& Flight::operator--()
   (*(*this).plane)--;
   return *this;
 } //removePassenger()
+
+bool Flight::find(char *name)
+{
+  return plane->find(name);
+}

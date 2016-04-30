@@ -10,8 +10,8 @@
 
 using namespace std;
 
-enum {DONE, ADD_PASSENGER, REMOVE_PASSENGER, ADD_FLIGHT, REMOVE_FLIGHT};
-const int MAX_CHOICE = REMOVE_FLIGHT;
+enum {DONE, ADD_PASSENGER, REMOVE_PASSENGER, ADD_FLIGHT, REMOVE_FLIGHT, FIND};
+const int MAX_CHOICE = FIND;
 
 int getChoice()
 {
@@ -22,6 +22,7 @@ int getChoice()
   cout << REMOVE_PASSENGER << ". Remove Passenger.\n";
   cout << ADD_FLIGHT << ". Add Flight.\n";
   cout << REMOVE_FLIGHT << ". Remove Flight.\n";
+  cout << FIND << ". Find Passenger.\n";
 
   do
   {
@@ -64,6 +65,7 @@ int main(int argc, char** argv)
       case REMOVE_PASSENGER : flights.removePassenger(); break;
       case ADD_FLIGHT : ++flights; break;
       case REMOVE_FLIGHT : --flights; break;
+      case FIND : flights.find(); break;
     }  // switch
 
   return 0;

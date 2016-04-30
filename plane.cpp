@@ -19,7 +19,6 @@ Plane::Plane()
 
 Plane::Plane(int flightNum) :reserved( 0 ), flightNumber (flightNum)
 {
-
 }  // Plane()
 
 istream& operator>>(istream &is, Plane &rhs)
@@ -200,7 +199,7 @@ Plane& Plane::operator--(int)
 
   inOutf.close();
   return *this;
-}
+} //removePassenger()
 
 Plane& Plane::operator!()
 {
@@ -257,3 +256,28 @@ void Plane::writePlane(ofstream &outf) const
         outf2.write((char*) &passenger, sizeof(Passenger));
       }  // if seat not empty
 }  // readPlane()
+
+bool Plane::find(char *name) const
+{
+  Passenger passenger;
+  fstream inOutf("passengers2.dat", ios::binary | ios::in | ios::out);
+  bool found = false;
+
+  for(int row = 0; !found && row < rows; row++)
+    for(int seatNum = 0; !found && seatNum < width; seatNum++)
+      if(passengers[row][seatNum] != EMPTY)
+      {
+        inOutf.seekg(passengers[row][seatNum], ios::beg);
+        inOutf.read((char*) &passenger, sizeof(Passenger));
+
+        if(passenger == name)
+        {
+          cout << "Flight #" << flightNumber << " Row: " << row + FIRST_ROW;
+          cout << " Seat: " << char(seatNum + FIRST_SEAT) << endl;
+          found = true;
+        }  // if found name
+      }  // if seat not empty
+
+  inOutf.close();
+  return found;
+}

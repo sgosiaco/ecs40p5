@@ -26,6 +26,7 @@ public:
   ~Plane();
   void addFlight();
   void writePlane(ofstream &outf) const;
+  bool find(char *name) const;
   friend istream& operator>>(istream &is, Plane &plane);
   Plane& operator++();
   Plane& operator--(int);
