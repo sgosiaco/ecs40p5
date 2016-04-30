@@ -117,6 +117,7 @@ Plane& Plane::operator++()
   Passenger passenger(flightNumber, row, seat, name);
   outf.write((char*) &passenger, sizeof(Passenger));
   reserved++;
+  outf.close();
   return *this;
 } //++
 
