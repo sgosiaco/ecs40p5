@@ -85,7 +85,7 @@ void Plane::addFlight()
 Plane& Plane::operator++()
 {
   int row, seatNum;
-  char name[Passenger::NAME_LENGTH], seat;
+  char name[Passenger::NAME_LENGTH];
 
   if(reserved == rows * width)
   {
@@ -101,8 +101,7 @@ Plane& Plane::operator++()
   {
     row = getRow();
     cout << "Please enter the seat letter you wish to reserve: ";
-    seat = cin.get();
-    seatNum = seat - FIRST_SEAT;
+    seatNum = cin.get() -  FIRST_SEAT;
 
     while(cin.get() != '\n');
 
@@ -114,7 +113,7 @@ Plane& Plane::operator++()
 
   ofstream outf("passengers2.dat", ios::binary | ios::app);
   passengers[row - FIRST_ROW][seatNum] = outf.tellp();
-  Passenger passenger(flightNumber, row, seat, name);
+  Passenger passenger(flightNumber, row, seatNum + FIRST_SEAT, name);
   outf.write((char*) &passenger, sizeof(Passenger));
   reserved++;
   outf.close();
