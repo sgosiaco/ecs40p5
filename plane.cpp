@@ -11,12 +11,6 @@
 
 using namespace std;
 
-
-Plane::Plane()
-{
-}  // Plane()
-
-
 Plane::Plane(int flightNum) :reserved( 0 ), flightNumber (flightNum)
 {
 }  // Plane()

@@ -21,7 +21,6 @@ class Plane
   void showPassengers() const;
   friend ostream& operator<<(ostream &os, const Plane &rhs);
 public:
-  Plane();
   Plane(int flightNum);
   ~Plane();
   void addFlight();
