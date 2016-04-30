@@ -8,10 +8,9 @@
 
 using namespace std;
 
-Flight& Flight::operator++(int)
+const Flight& Flight::operator++(int)
 {
-  if(!plane->addPassenger())
-    cout << "We are sorry but Flight #" << flightNum << " is full.\n";
+  ++(*plane);
   return *this;
 } //addPassenger()
 
@@ -61,14 +60,14 @@ istream& operator>>(istream &is, Flight &flight)
   return is;
 } // readFlight()
 
-Flight& operator!(Flight &flight)
+Flight& Flight::operator!()
 {
-  flight.plane->removePlane();
-  return flight;
+  !(*(*this).plane);
+  return *this;
 } //removeFlight()
 
-Flight& operator--(Flight &flight)
+Flight& Flight::operator--()
 {
-  flight.plane->removePassenger();
-  return flight;
+  (*(*this).plane)--;
+  return *this;
 } //removePassenger()

@@ -23,19 +23,19 @@ Flights::~Flights()
   delete [] flights;
 } // ~Flights()
 
-Flights& operator++(Flights &rhs)
+Flights& Flights::operator++()
 {
   int i;
   cout << "Existing Flights:\n\n";
   cout << "Flt# Origin               Destination\n";
 
-  for(i = 0; i < rhs.size; i++)
-    cout << *(rhs.flights[i]);
+  for(i = 0; i < size; i++)
+    cout << *(flights[i]);
 
   Flight *flight = new Flight();
   flight->addFlight();
-  rhs += flight;
-  return rhs;
+  (*this) += flight;
+  return *this;
 } //addFlight()
 
 void Flights::addPassenger() const
@@ -74,29 +74,29 @@ void Flights::addPassenger() const
   } while((flightNumber != 0 && i == size) || flightNumber == ERROR);
 }  // addPassenger()
 
-Flights& operator+=(Flights &rhs, Flight *flight)
+Flights& Flights::operator+=(Flight *flight)
 {
   int i;
 
-  if(rhs.capacity == rhs.size)
+  if(capacity == size)
   {
-    Flight **temp = rhs.flights;
-    rhs.capacity *= rhs.RESIZE_MULTIPLIER;
-    rhs.flights = new Flight*[rhs.capacity];
+    Flight **temp = flights;
+    capacity *= RESIZE_MULTIPLIER;
+    flights = new Flight*[capacity];
 
-    for(i = 0; i < rhs.size; i++)
-      rhs.flights[i] = temp[i];
+    for(i = 0; i < size; i++)
+      flights[i] = temp[i];
 
     delete [] temp;
   } // if size == capacity
 
-  for(i = rhs.size - 1;
-    i >= 0 && rhs.flights[i]->getFlightNumber() > flight->getFlightNumber(); i--)
-    rhs.flights[i + 1] = rhs.flights[i];
+  for(i = size - 1;
+    i >= 0 && flights[i]->getFlightNumber() > flight->getFlightNumber(); i--)
+    flights[i + 1] = flights[i];
 
-  rhs.flights[i + 1] = flight;
-  (rhs.size)++;
-  return rhs;
+  flights[i + 1] = flight;
+  (size)++;
+  return *this;
 } //insert()
 
 int Flights::getSize() const
@@ -120,33 +120,33 @@ istream& operator>>(istream &is, Flights &rhs)
   return is;
 } //readFlights()
 
-Flights& operator--(Flights &rhs)
+Flights& Flights::operator--()
 {
   int i, flightNumber;
   cout << "Existing Flights:\n\n";
   cout << "Flt# Origin               Destination\n";
 
-  for(i = 0; i < rhs.size; i++)
-    cout << *(rhs.flights[i]);
+  for(i = 0; i < size; i++)
+    cout << *(flights[i]);
 
   cout << "\nFlight number to remove: ";
   cin >> flightNumber;
-  cin.ignore(rhs.TEN, '\n');
+  cin.ignore(TEN, '\n');
 
-  for(i = 0; i < rhs.size; i++)
-    if(rhs.flights[i]->getFlightNumber() == flightNumber)
+  for(i = 0; i < size; i++)
+    if(flights[i]->getFlightNumber() == flightNumber)
     {
-      !(*(rhs.flights[i]));
-      delete rhs.flights[i];
+      !(*(flights[i]));
+      delete flights[i];
 
-      for(; i < rhs.size - 1; i++)
-        rhs.flights[i] = rhs.flights[i + 1];
+      for(; i < size - 1; i++)
+        flights[i] = flights[i + 1];
 
-      rhs.size--;
+      size--;
       break;
     }  // if found match of flight
 
-  return rhs;
+  return *this;
 } //removeFlight()
 
 void Flights::removePassenger() const

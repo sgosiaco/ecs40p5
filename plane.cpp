@@ -83,14 +83,16 @@ void Plane::addFlight()
   } // for each row
 }  // addFlight()
 
-
-int Plane::addPassenger()
+Plane& Plane::operator++()
 {
   int row, seatNum;
   char name[Passenger::NAME_LENGTH], seat;
 
   if(reserved == rows * width)
-    return 0;  // false
+  {
+    cout << "We are sorry but Flight #" << flightNumber << " is full.\n";
+    return *this;
+  } //if full
 
   cout << "Please enter the name of the passenger: ";
   cin.getline(name, Passenger::NAME_LENGTH);
@@ -116,9 +118,8 @@ int Plane::addPassenger()
   Passenger passenger(flightNumber, row, seat, name);
   outf.write((char*) &passenger, sizeof(Passenger));
   reserved++;
-  return 1;
-}  // addPassenger()
-
+  return *this;
+} //addPassenger()
 
 int Plane::getRow() const
 {
@@ -169,8 +170,7 @@ void Plane::showGrid() const
   cout << "\nX = reserved.\n";
 }  // showGrid()
 
-
-void Plane::removePassenger()
+Plane& Plane::operator--(int)
 {
   char name[Passenger::NAME_LENGTH];
   Passenger passenger;
@@ -199,10 +199,10 @@ void Plane::removePassenger()
       }  // if seat not empty
 
   inOutf.close();
-}  // removePassenger()
+  return *this;
+}
 
-
-void Plane::removePlane() const
+Plane& Plane::operator!()
 {
   Passenger passenger;
   fstream inOutf("passengers2.dat", ios::binary | ios::in | ios::out);
@@ -218,7 +218,8 @@ void Plane::removePlane() const
         inOutf.write((char*) &passenger, sizeof(Passenger));
       }  // if seat not empty
 
-}  // removePlane()
+  return *this;
+} //removePlane()
 
 ostream& operator<<(ostream &os, const Plane &rhs)
 {

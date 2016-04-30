@@ -25,11 +25,11 @@ public:
   Plane(int flightNum);
   ~Plane();
   void addFlight();
-  int addPassenger();
-  void removePassenger();
-  void removePlane() const;
   void writePlane(ofstream &outf) const;
   friend istream& operator>>(istream &is, Plane &plane);
+  Plane& operator++();
+  Plane& operator--(int);
+  Plane& operator!();
 }; // class Plane
 
 #endif	// PLANE_H
