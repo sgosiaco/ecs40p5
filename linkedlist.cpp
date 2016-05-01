@@ -66,10 +66,11 @@ ostream& operator<<(ostream &os, const LinkedList &list)
   {
     if(curr->offset != list.EMPTY)
       os << 'X';
-    else
+    else //empty
       os << '-';
 
     curr = curr->next;
   } //while
+
   return os;
 } //<<
