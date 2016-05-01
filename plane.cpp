@@ -45,6 +45,9 @@ istream& operator>>(istream &is, Plane &rhs)
 
 Plane::~Plane()
 {
+  for(int row = 0; row < rows; row++)
+    delete &passengers[row];
+  
   delete [] passengers;
 }  // ~Plane()
 

@@ -13,15 +13,16 @@ void LinkedList::initialize(int row)
   for(int i = 0; i < row; i++)
     head = new ListNode(EMPTY, head);
 
-} //initalize
+} //initialize
 
 LinkedList::~LinkedList()
 {
-  while(head != NULL)
+  ListNode *curr = head;
+  while(curr != NULL)
   {
-    ListNode *temp = head->next;
-    delete head;
-    head = temp;
+    ListNode *temp = curr->next;
+    delete curr;
+    curr = temp;
   } //while
 } //decon
 
