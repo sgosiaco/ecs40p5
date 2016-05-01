@@ -15,7 +15,7 @@ class ListNode
 class LinkedList
 {
   private:
-    ListNode *head;
+    ListNode *head = NULL;
     static const int EMPTY = -1;
   public:
     void initialize(int row);

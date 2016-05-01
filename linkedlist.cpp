@@ -18,12 +18,15 @@ void LinkedList::initialize(int row)
 LinkedList::~LinkedList()
 {
   ListNode *curr = head;
+
   while(curr != NULL)
   {
     ListNode *temp = curr->next;
     delete curr;
     curr = temp;
   } //while
+
+  head = NULL;
 } //decon
 
 int& LinkedList::operator[](int index)

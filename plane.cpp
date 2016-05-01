@@ -45,9 +45,6 @@ istream& operator>>(istream &is, Plane &rhs)
 
 Plane::~Plane()
 {
-  for(int row = 0; row < rows; row++)
-    delete &passengers[row];
-  
   delete [] passengers;
 }  // ~Plane()
 
@@ -219,7 +216,7 @@ ostream& operator<<(ostream &os, const Plane &rhs)
         os << passenger << endl;
       }  // if not NEG
 
-   inf.close();
+  inf.close();
   return os;
 } //<<
 
@@ -240,6 +237,9 @@ void Plane::writePlane(ofstream &outf) const
         inf.read((char*) &passenger, sizeof(Passenger));
         outf2.write((char*) &passenger, sizeof(Passenger));
       }  // if seat not NEG
+
+  inf.close();
+  outf2.close();
 }  // readPlane()
 
 bool Plane::find(char *name) const
