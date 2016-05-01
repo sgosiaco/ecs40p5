@@ -11,10 +11,9 @@ ListNode::ListNode(int off, ListNode *n): offset(off), next(n)
 void LinkedList::initalize(int row)
 {
   for(int i = 0; i < row; i++)
-  {
     head = new ListNode(EMPTY, head);
-  }
-}
+
+} //initalize
 
 LinkedList::~LinkedList()
 {
@@ -23,8 +22,8 @@ LinkedList::~LinkedList()
     ListNode *temp = head->next;
     delete head;
     head = temp;
-  }
-}
+  } //while
+} //decon
 
 int& LinkedList::operator[](int index)
 {
@@ -37,9 +36,9 @@ int& LinkedList::operator[](int index)
       return temp->offset;
     num++;
     temp = temp->next;
-  }
+  }//while
   return temp->offset;
-}
+}//get
 
 const int& LinkedList::operator[](int index) const
 {
@@ -52,6 +51,6 @@ const int& LinkedList::operator[](int index) const
       return temp->offset;
     num++;
     temp = temp->next;
-  }
+  }//while
   return temp->offset;
-}
+}//get
