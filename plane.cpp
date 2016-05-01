@@ -137,13 +137,7 @@ void Plane::showGrid() const
   for(row = 0; row < rows; row++)
   {
     cout << right << setw(ROW_SPACE) << row + 1 << "   ";
-
-    for(seatNum = 0; seatNum < width; seatNum++)
-      if(passengers[row][seatNum] != NEG)
-        cout << 'X';
-      else  // NEG seat
-        cout << '-';
-
+    cout << passengers[row];
     cout << endl;
   }  // for each row
 

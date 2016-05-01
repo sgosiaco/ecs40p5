@@ -1,4 +1,3 @@
-
 #include <fstream>
 #include "linkedlist.h"
 using namespace std;
@@ -58,3 +57,19 @@ const int& LinkedList::operator[](int index) const
   }//while
   return temp->offset;
 }//get
+
+ostream& operator<<(ostream &os, LinkedList list)
+{
+  ListNode *curr = list.head;
+
+  while(curr != NULL)
+  {
+    if(curr->offset != list.EMPTY)
+      os << 'X';
+    else
+      os << '-';
+
+    curr = curr->next;
+  } //while
+  return os;
+} //<<

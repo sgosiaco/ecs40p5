@@ -1,8 +1,11 @@
 #ifndef LINKEDLIST_H
 #define	LINKEDLIST_H
 
+#include <fstream>
+#include <iostream>
+using namespace std;
 
-class List;
+class LinkedList;
 class ListNode
 {
   private:
@@ -10,6 +13,7 @@ class ListNode
     ListNode *next;
     friend class LinkedList;
     ListNode(int off, ListNode *n);
+    friend ostream& operator<<(ostream &os, LinkedList list);
 }; // class listnode
 
 class LinkedList
@@ -22,6 +26,7 @@ class LinkedList
     ~LinkedList();
     int& operator[](int index);
     const int& operator[](int index) const;
+    friend ostream& operator<<(ostream &os, LinkedList list);
 }; //class LinkedList
 
 #endif	// LINKEDLIST_H
