@@ -17,10 +17,10 @@ public:
   Passenger();
   Passenger(short flightNu, short ro, char sea, const char nam[]);
   static void copyPassengers();
-  bool operator==(int num);
-  bool operator==(const char *name);
+  bool operator==(int num) const;
+  bool operator==(const char *name) const;
   Passenger& operator!();
-  friend ostream& operator<<(ostream &os, Passenger pass);
+  friend ostream& operator<<(ostream &os, const Passenger &pass);
   friend istream& operator>>(istream &is, Plane &plane);
 }; // class passengers
 

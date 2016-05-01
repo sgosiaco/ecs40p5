@@ -58,7 +58,7 @@ const int& LinkedList::operator[](int index) const
   return temp->offset;
 }//get
 
-ostream& operator<<(ostream &os, LinkedList list)
+ostream& operator<<(ostream &os, const LinkedList &list)
 {
   ListNode *curr = list.head;
 

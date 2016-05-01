@@ -13,7 +13,7 @@ class ListNode
     ListNode *next;
     friend class LinkedList;
     ListNode(int off, ListNode *n);
-    friend ostream& operator<<(ostream &os, LinkedList list);
+    friend ostream& operator<<(ostream &os, const LinkedList &list);
 }; // class listnode
 
 class LinkedList
@@ -26,7 +26,7 @@ class LinkedList
     ~LinkedList();
     int& operator[](int index);
     const int& operator[](int index) const;
-    friend ostream& operator<<(ostream &os, LinkedList list);
+    friend ostream& operator<<(ostream &os, const LinkedList &list);
 }; //class LinkedList
 
 #endif	// LINKEDLIST_H

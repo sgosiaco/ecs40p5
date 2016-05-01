@@ -31,12 +31,12 @@ void Passenger::copyPassengers()
   inf.close();
 }  // copyPassengers()
 
-bool Passenger::operator==(int num)
+bool Passenger::operator==(int num) const
 {
   return flightNum == num;
 } //num equal
 
-bool Passenger::operator==(const char* n)
+bool Passenger::operator==(const char* n) const
 {
   return (strcmp(name, n) == 0);
 } //name equal
@@ -47,7 +47,7 @@ Passenger& Passenger::operator!()
   return *this;
 } //cancel
 
-ostream& operator<<(ostream &os, Passenger pass)
+ostream& operator<<(ostream &os, const Passenger &pass)
 {
   os << pass.name;
   return os;
