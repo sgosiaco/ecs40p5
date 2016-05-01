@@ -11,7 +11,7 @@
 
 using namespace std;
 
-Plane::Plane(int flightNum) :reserved( 0 ), flightNumber (flightNum)
+Plane::Plane(int flightNum) :reserved( 0 ), flightNumber(flightNum)
 {
 }  // Plane()
 

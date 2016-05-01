@@ -8,7 +8,7 @@
 
 using namespace std;
 
-const Flight& Flight::operator++(int)
+Flight& Flight::operator++(int)
 {
   ++(*plane);
   return *this;
@@ -62,13 +62,13 @@ istream& operator>>(istream &is, Flight &flight)
 
 Flight& Flight::operator!()
 {
-  !(*(*this).plane);
+  !(*plane);
   return *this;
 } //!
 
 Flight& Flight::operator--()
 {
-  (*(*this).plane)--;
+  (*plane)--;
   return *this;
 } //--
 

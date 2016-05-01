@@ -17,7 +17,7 @@ class Flight
   char destination[MAX_CITY_LENGTH];
   Plane *plane;
 public:
-  const Flight& operator++(int);
+  Flight& operator++(int);
   ~Flight();
   void addFlight();
   int getFlightNumber() const;

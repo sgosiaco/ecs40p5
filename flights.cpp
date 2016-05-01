@@ -170,14 +170,12 @@ void Flights::find() const
 {
   char name[Passenger::NAME_LENGTH];
   cout << "\nName of passenger: ";
-  cin.getline(name, Passenger::NAME_LENGTH);\
+  cin.getline(name, Passenger::NAME_LENGTH);
   bool found = false;
 
   for(int i = 0; i < size; i++)
     if(flights[i]->find(name))
-    {
       found = true;
-    }//if match
 
   if(!found)
       cout << name << " not found.\n";
