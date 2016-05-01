@@ -1,6 +1,7 @@
 #ifndef PLANE_H
 #define	PLANE_H
 #include <fstream>
+#include "linkedlist.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ class Plane
   int rows;
   int width;
   int reserved;
-  int **passengers;
+  LinkedList *passengers;
   int flightNumber;
   int getRow() const;
   void showGrid() const;

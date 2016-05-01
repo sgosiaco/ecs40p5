@@ -8,6 +8,7 @@
 #include "plane.h"
 #include "utilities.h"
 #include "passenger.h"
+#include "linkedlist.h"
 
 using namespace std;
 
@@ -17,19 +18,14 @@ Plane::Plane(int flightNum) :reserved( 0 ), flightNumber(flightNum)
 
 istream& operator>>(istream &is, Plane &rhs)
 {
-  int row, seatNum;
+  int row;
   char comma;
   Passenger pass;
   is >> rhs.rows >> comma >> rhs.width;
-  rhs.passengers = new int* [rhs.rows];
+  rhs.passengers = new LinkedList[rhs.rows];
 
   for(row = 0; row < rhs.rows; row++)
-  {
-    rhs.passengers[row] = new int[rhs.width];
-
-    for(seatNum = 0; seatNum < rhs.width; seatNum++)
-      rhs.passengers[row][seatNum] = rhs.EMPTY;
-  } // for each row
+    rhs.passengers[row].initalize(rhs.width);
 
   ifstream inf2("passengers.dat", ios::binary);
 
@@ -49,11 +45,6 @@ istream& operator>>(istream &is, Plane &rhs)
 
 Plane::~Plane()
 {
-  int row;
-
-  for(row = 0; row < rows; row++)
-    delete [] passengers[row];
-
   delete [] passengers;
 }  // ~Plane()
 
@@ -65,15 +56,11 @@ void Plane::addFlight()
   cout << "Width: ";
   cin >> width;
   cin.ignore(TEN, '\n');
-  passengers = new int* [rows];
+  passengers = new LinkedList[rows];
 
   for(int row = 0; row < rows; row++)
-  {
-    passengers[row] = new int[width];
+    passengers[row].initalize(width);
 
-    for(int seatNum = 0; seatNum < width; seatNum++)
-      passengers[row][seatNum] = EMPTY;
-  } // for each row
 }  // addFlight()
 
 Plane& Plane::operator++()
