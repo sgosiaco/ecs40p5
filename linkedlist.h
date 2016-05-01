@@ -18,7 +18,7 @@ class LinkedList
     ListNode *head;
     static const int EMPTY = -1;
   public:
-    void initalize(int row);
+    void initialize(int row);
     ~LinkedList();
     int& operator[](int index);
     const int& operator[](int index) const;

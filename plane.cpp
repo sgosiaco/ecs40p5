@@ -25,7 +25,7 @@ istream& operator>>(istream &is, Plane &rhs)
   rhs.passengers = new LinkedList[rhs.rows];
 
   for(row = 0; row < rhs.rows; row++)
-    rhs.passengers[row].initalize(rhs.width);
+    rhs.passengers[row].initialize(rhs.width);
 
   ifstream inf2("passengers.dat", ios::binary);
 
@@ -59,7 +59,7 @@ void Plane::addFlight()
   passengers = new LinkedList[rows];
 
   for(int row = 0; row < rows; row++)
-    passengers[row].initalize(width);
+    passengers[row].initialize(width);
 
 }  // addFlight()
 
@@ -86,7 +86,7 @@ Plane& Plane::operator++()
 
     while(cin.get() != '\n');
 
-    if(passengers[row - FIRST_ROW][seatNum] == EMPTY)
+    if(passengers[row - FIRST_ROW][seatNum] == NEG)
       break;
 
     printf("That seat is already occupied.\nPlease try again.\n");
@@ -139,9 +139,9 @@ void Plane::showGrid() const
     cout << right << setw(ROW_SPACE) << row + 1 << "   ";
 
     for(seatNum = 0; seatNum < width; seatNum++)
-      if(passengers[row][seatNum] != EMPTY)
+      if(passengers[row][seatNum] != NEG)
         cout << 'X';
-      else  // empty seat
+      else  // NEG seat
         cout << '-';
 
     cout << endl;
@@ -163,7 +163,7 @@ Plane& Plane::operator--(int)
 
   for(int row = 0; !found && row < rows; row++)
     for(int seatNum = 0; !found && seatNum < width; seatNum++)
-      if(passengers[row][seatNum] != EMPTY)
+      if(passengers[row][seatNum] != NEG)
       {
         inOutf.seekg(passengers[row][seatNum], ios::beg);
         inOutf.read((char*) &passenger, sizeof(Passenger));
@@ -173,10 +173,10 @@ Plane& Plane::operator--(int)
           !passenger;
           inOutf.seekp(passengers[row][seatNum], ios::beg);
           inOutf.write((char*) &passenger, sizeof(Passenger));
-          passengers[row][seatNum] = EMPTY;
+          passengers[row][seatNum] = NEG;
           found = true;
         }  // if found name
-      }  // if seat not empty
+      }  // if seat not NEG
 
   inOutf.close();
   return *this;
@@ -189,14 +189,14 @@ Plane& Plane::operator!()
 
   for(int row = 0; row < rows; row++)
     for(int seatNum = 0; seatNum < width; seatNum++)
-      if(passengers[row][seatNum] != EMPTY)
+      if(passengers[row][seatNum] != NEG)
       {
         inOutf.seekg(passengers[row][seatNum], ios::beg);
         inOutf.read((char*) &passenger, sizeof(Passenger));
         !passenger;
         inOutf.seekp(passengers[row][seatNum], ios::beg);
         inOutf.write((char*) &passenger, sizeof(Passenger));
-      }  // if seat not empty
+      }  // if seat not NEG
 
   inOutf.close();
   return *this;
@@ -209,12 +209,12 @@ ostream& operator<<(ostream &os, const Plane &rhs)
 
   for(int row = 0; row < rhs.rows; row++)
     for(int seatNum = 0; seatNum < rhs.width; seatNum++)
-      if(rhs.passengers[row][seatNum] != rhs.EMPTY)
+      if(rhs.passengers[row][seatNum] != rhs.NEG)
       {
         inf.seekg(rhs.passengers[row][seatNum], ios::beg);
         inf.read((char*) &passenger, sizeof(Passenger));
         os << passenger << endl;
-      }  // if not EMPTY
+      }  // if not NEG
 
    inf.close();
   return os;
@@ -231,12 +231,12 @@ void Plane::writePlane(ofstream &outf) const
 
   for(row = 0; row < rows; row++)
     for(seatNum = 0; seatNum < width; seatNum++)
-      if(passengers[row][seatNum] != EMPTY)
+      if(passengers[row][seatNum] != NEG)
       {
         inf.seekg(passengers[row][seatNum], ios::beg);
         inf.read((char*) &passenger, sizeof(Passenger));
         outf2.write((char*) &passenger, sizeof(Passenger));
-      }  // if seat not empty
+      }  // if seat not NEG
 }  // readPlane()
 
 bool Plane::find(char *name) const
@@ -247,7 +247,7 @@ bool Plane::find(char *name) const
 
   for(int row = 0; !found && row < rows; row++)
     for(int seatNum = 0; !found && seatNum < width; seatNum++)
-      if(passengers[row][seatNum] != EMPTY)
+      if(passengers[row][seatNum] != NEG)
       {
         inOutf.seekg(passengers[row][seatNum], ios::beg);
         inOutf.read((char*) &passenger, sizeof(Passenger));
@@ -258,7 +258,7 @@ bool Plane::find(char *name) const
           cout << " Seat: " << char(seatNum + FIRST_SEAT) << endl;
           found = true;
         }  // if found name
-      }  // if seat not empty
+      }  // if seat not NEG
 
   inOutf.close();
   return found;

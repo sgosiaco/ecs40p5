@@ -8,7 +8,7 @@ ListNode::ListNode(int off, ListNode *n): offset(off), next(n)
 
 } //default const.
 
-void LinkedList::initalize(int row)
+void LinkedList::initialize(int row)
 {
   for(int i = 0; i < row; i++)
     head = new ListNode(EMPTY, head);

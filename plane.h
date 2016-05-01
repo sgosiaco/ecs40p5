@@ -7,7 +7,7 @@ using namespace std;
 
 class Plane
 {
-  static const int EMPTY = -1;
+  static const int NEG = -1;
   static const int FIRST_ROW = 1;
   static const int FIRST_SEAT = 'A';
   static const int TEN = 10;
