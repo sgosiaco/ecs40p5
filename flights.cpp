@@ -100,7 +100,7 @@ Flights& Flights::operator+=(Flight *flight)
   return *this;
 } //+=
 
-istream& operator>>(istream &is, Flights &rhs)
+istream& operator>>(istream &is, Flights &flights)
 {
   Flight *flight;
   int numberOfFlights;
@@ -110,7 +110,7 @@ istream& operator>>(istream &is, Flights &rhs)
   {
     flight = new Flight;
     is >> *flight;
-    rhs += flight;
+    flights += flight;
   }  // for each flight
 
   return is;
