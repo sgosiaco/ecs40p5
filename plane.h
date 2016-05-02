@@ -19,7 +19,6 @@ class Plane
   int flightNumber;
   int getRow() const;
   void showGrid() const;
-  void showPassengers() const;
   friend ostream& operator<<(ostream &os, const Plane &rhs);
 public:
   Plane(int flightNum);
