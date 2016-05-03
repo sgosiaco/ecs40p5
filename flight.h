@@ -21,7 +21,7 @@ public:
   ~Flight();
   void addFlight();
   int getFlightNumber() const;
-  bool find(char *name);
+  bool find(const char *name) const;
   friend ostream& operator<<(ostream &os, const Flight &flight);
   friend istream& operator>>(istream &is, Flight &flight);
   Flight& operator!();

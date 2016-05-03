@@ -1,5 +1,5 @@
 // Author: Sean Davis
-
+// Edited by: Sean Gosiaco
 #include <cstring>
 #include <iostream>
 #include <fstream>
@@ -72,7 +72,7 @@ Flight& Flight::operator--()
   return *this;
 } //--
 
-bool Flight::find(char *name)
+bool Flight::find(const char *name) const
 {
   return plane->find(name);
 } //find

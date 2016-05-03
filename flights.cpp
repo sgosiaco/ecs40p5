@@ -1,5 +1,5 @@
 // Author: Sean Davis
-
+// Edited by: Sean Gosiaco
 #include "flights.h"
 #include "utilities.h"
 #include "passenger.h"

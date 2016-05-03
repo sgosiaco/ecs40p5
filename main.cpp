@@ -1,5 +1,5 @@
 // Author: Sean Davis
-
+// Edited by: Sean Gosiaco
 #include <iostream>
 #include <fstream>
 #include <iomanip>
