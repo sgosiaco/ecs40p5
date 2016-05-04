@@ -15,10 +15,10 @@ public:
   Flights();
   ~Flights();
   void addPassenger() const;
-  Flights& operator++();
-  Flights& operator+=(Flight *flight);
+  const Flights& operator++();
+  const Flights& operator+=(Flight *flight);
   friend istream& operator>>(istream &is, Flights &rhs);
-  Flights& operator--(int);
+  const Flights& operator--(int);
   void removePassenger() const;
   void find() const;
 }; // class flights

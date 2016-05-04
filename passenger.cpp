@@ -41,7 +41,7 @@ bool Passenger::operator==(const char* n) const
   return (strcmp(name, n) == 0);
 } //name equal
 
-Passenger& Passenger::operator!()
+const Passenger& Passenger::operator!()
 {
   flightNum = CANCELLED;
   return *this;

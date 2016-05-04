@@ -27,9 +27,9 @@ public:
   void writePlane(ofstream &outf) const;
   bool find(char *name) const;
   friend istream& operator>>(istream &is, Plane &plane);
-  Plane& operator++();
-  Plane& operator--(int);
-  Plane& operator!();
+  const Plane& operator++();
+  const Plane& operator--(int);
+  const Plane& operator!() const;
 }; // class Plane
 
 #endif	// PLANE_H

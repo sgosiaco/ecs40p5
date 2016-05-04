@@ -24,7 +24,7 @@ Flights::~Flights()
   delete [] flights;
 } // ~Flights()
 
-Flights& Flights::operator++()
+const Flights& Flights::operator++()
 {
   int i;
   cout << "Existing Flights:\n\n";
@@ -75,7 +75,7 @@ void Flights::addPassenger() const
   } while((flightNumber != 0 && i == size) || flightNumber == ERROR);
 }  // addPassenger()
 
-Flights& Flights::operator+=(Flight *flight)
+const Flights& Flights::operator+=(Flight *flight)
 {
   int i;
 
@@ -116,7 +116,7 @@ istream& operator>>(istream &is, Flights &flights)
   return is;
 } //>>
 
-Flights& Flights::operator--(int)
+const Flights& Flights::operator--(int)
 {
   int i, flightNumber;
   cout << "Existing Flights:\n\n";

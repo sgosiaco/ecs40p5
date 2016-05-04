@@ -19,7 +19,7 @@ public:
   static void copyPassengers();
   bool operator==(int num) const;
   bool operator==(const char *name) const;
-  Passenger& operator!();
+  const Passenger& operator!();
   friend ostream& operator<<(ostream &os, const Passenger &pass);
   friend istream& operator>>(istream &is, Plane &plane);
 }; // class passengers

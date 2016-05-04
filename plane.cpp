@@ -63,7 +63,7 @@ void Plane::addFlight()
 
 }  // addFlight()
 
-Plane& Plane::operator++()
+const Plane& Plane::operator++()
 {
   int row, seatNum;
   char name[Passenger::NAME_LENGTH];
@@ -144,7 +144,7 @@ void Plane::showGrid() const
   cout << "\nX = reserved.\n";
 }  // showGrid()
 
-Plane& Plane::operator--(int)
+const Plane& Plane::operator--(int)
 {
   char name[Passenger::NAME_LENGTH];
   Passenger passenger;
@@ -176,7 +176,7 @@ Plane& Plane::operator--(int)
   return *this;
 } //--
 
-Plane& Plane::operator!()
+const Plane& Plane::operator!() const
 {
   Passenger passenger;
   fstream inOutf("passengers2.dat", ios::binary | ios::in | ios::out);
