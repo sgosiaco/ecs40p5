@@ -17,14 +17,14 @@ class Flight
   char destination[MAX_CITY_LENGTH];
   Plane *plane;
 public:
-  const Flight& operator++(int) const;
   ~Flight();
   void addFlight();
   int getFlightNumber() const;
   bool find(const char *name) const;
-  friend ostream& operator<<(ostream &os, const Flight &flight);
-  friend istream& operator>>(istream &is, Flight &flight);
+  const Flight& operator++(int) const;
   const Flight& operator!() const;
   const Flight& operator--() const;
+  friend ostream& operator<<(ostream &os, const Flight &flight);
+  friend istream& operator>>(istream &is, Flight &flight);
 } ;  // class Flight
 #endif	// FLIGHT_H

@@ -144,7 +144,7 @@ void Plane::showGrid() const
   cout << "\nX = reserved.\n";
 }  // showGrid()
 
-const Plane& Plane::operator--(int)
+const Plane& Plane::operator--(int) const
 {
   char name[Passenger::NAME_LENGTH];
   Passenger passenger;

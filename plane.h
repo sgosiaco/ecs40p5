@@ -26,10 +26,10 @@ public:
   void addFlight();
   void writePlane(ofstream &outf) const;
   bool find(const char *name) const;
-  friend istream& operator>>(istream &is, Plane &plane);
   const Plane& operator++();
-  const Plane& operator--(int);
+  const Plane& operator--(int) const;
   const Plane& operator!() const;
+  friend istream& operator>>(istream &is, Plane &plane);
 }; // class Plane
 
 #endif	// PLANE_H
