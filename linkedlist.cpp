@@ -1,3 +1,4 @@
+// Author: Sean Gosiaco
 #include <fstream>
 #include "linkedlist.h"
 using namespace std;

@@ -1,4 +1,5 @@
 // Author: Sean Davis
+// Edited by: Sean Gosiaco
 #include <cstring>
 #include <fstream>
 #include "passenger.h"
@@ -31,7 +32,7 @@ void Passenger::copyPassengers()
   inf.close();
 }  // copyPassengers()
 
-bool Passenger::operator==(int num) const
+bool Passenger::operator==(const int num) const
 {
   return flightNum == num;
 } //num equal

@@ -1,5 +1,5 @@
 // Author: Sean Davis
-
+// Edited by: Sean Gosiaco
 #include <cstring>
 #include <cctype>
 #include <iostream>
@@ -236,7 +236,7 @@ void Plane::writePlane(ofstream &outf) const
   outf2.close();
 }  // readPlane()
 
-bool Plane::find(char *name) const
+bool Plane::find(const char *name) const
 {
   Passenger passenger;
   fstream inOutf("passengers2.dat", ios::binary | ios::in | ios::out);
