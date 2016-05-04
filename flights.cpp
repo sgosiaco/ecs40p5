@@ -75,7 +75,7 @@ void Flights::addPassenger() const
   } while((flightNumber != 0 && i == size) || flightNumber == ERROR);
 }  // addPassenger()
 
-const Flights& Flights::operator+=(Flight *flight)
+const Flights& Flights::operator+=(Flight* const flight)
 {
   int i;
 
