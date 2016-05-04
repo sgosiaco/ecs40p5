@@ -23,4 +23,4 @@ linkedlist.o : linkedlist.cpp linkedlist.h
 	g++ -ansi -Wall -g -c linkedlist.cpp
 
 clean :
-	rm -f airline.out flight.o  flights.o  main.o  passenger.o  plane.o  utilities.o
+	rm -f airline.out flight.o  flights.o  main.o  passenger.o  plane.o  utilities.o linkedlist.o
